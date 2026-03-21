@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Демо • Certic Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+/* ═══════════════════════════════════════════════════════
+   CERTIC ADMIN — Design system (Manrope · Indigo · Mobile-first)
+   ═══════════════════════════════════════════════════════ */
+:root {
+  --bg:            #f5f6fa;
+  --bg2:           #eef0f8;
+  --surface:       #ffffff;
+  --border:        #e4e6f0;
+  --border-strong: #d0d3e8;
+  --ink:           #0f1120;
+  --ink2:          #4a4e6a;
+  --ink3:          #8589a8;
+  --accent:        #4f46e5;
+  --accent-h:      #3730c4;
+  --accent-light:  #eef0ff;
+  --accent-mid:    #c7d2fe;
+  --accent-glow:   rgba(79,70,229,.12);
+  --green:         #16a34a;
+  --green-bg:      #dcfce7;
+  --red:           #dc2626;
+  --red-bg:        #fef2f2;
+  --amber:         #d97706;
+  --purple:        #7c3aed;
+  --radius:        12px;
+  --radius-sm:     8px;
+  --radius-lg:     16px;
+  --font:          'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --ease:          cubic-bezier(0.4,0,0.2,1);
+  --dur:           0.2s;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { height: 100%; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.55;
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
+  padding: 0;
+}
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+input, select, textarea { font-family: var(--font); }
+
+/* ── LOGIN SCREEN ── */
+#loginScreen {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+  background: var(--bg);
+}
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 60px rgba(15,17,32,.1), 0 0 0 1px rgba(15,17,32,.04);
+  padding: 40px 36px;
+  width: 100%;
+  max-width: 380px;
+}
+#loginScreen .logo {
+  display: flex; align-items: center; justify-content: center;
+  width: 52px; height: 52px;
+  background: var(--accent-light); border-radius: 14px;
+  font-size: 24px; margin: 0 auto 20px;
+}
+#loginScreen h1 {
+  text-align: center; font-size: 20px; font-weight: 900;
+  letter-spacing: -.03em; margin-bottom: 4px;
+}
+#loginScreen p {
+  text-align: center; color: var(--ink3); font-size: 14px;
+  margin-bottom: 24px; font-weight: 500;
+}
+.field { margin-bottom: 14px; }
+.field label {
+  display: block; font-size: 11.5px; font-weight: 800;
+  color: var(--ink2); letter-spacing: .07em; text-transform: uppercase; margin-bottom: 6px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 500; color: var(--ink);
+  background: var(--surface); outline: none;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.field input:focus, .field select:focus, .field textarea:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-glow);
+}
+.alert { padding: 11px 14px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; margin-bottom: 14px; display: none; line-height: 1.5; }
+.alert-error { background: var(--red-bg); color: #991b1b; border: 1px solid #fecaca; }
+.alert-success { background: var(--green-bg); color: #14532d; border: 1px solid #86efac; }
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 13px 20px;
+  background: var(--accent); color: #fff;
+  border-radius: 50px; font-size: 14px; font-weight: 800;
+  cursor: pointer; margin-top: 6px;
+  box-shadow: 0 2px 12px rgba(79,70,229,.22);
+  transition: all var(--dur) var(--ease); border: none;
+}
+.btn:hover:not(:disabled) { background: var(--accent-h); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(79,70,229,.28); }
+.btn:active:not(:disabled) { transform: translateY(0); }
+.btn:disabled { opacity: .45; cursor: not-allowed; transform: none; }
+.btn-outline { background: var(--surface); color: var(--ink); border: 1.5px solid var(--border-strong); box-shadow: none; }
+.btn-outline:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-light); box-shadow: none; transform: translateY(-1px); }
+.btn-danger { background: var(--red); box-shadow: 0 2px 10px rgba(220,38,38,.2); }
+.btn-danger:hover:not(:disabled) { background: #b91c1c; }
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid rgba(255,255,255,.3); border-top-color: #fff;
+  border-radius: 50%; animation: spin .6s linear infinite; display: none; flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.topbar {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  height: 56px; padding: 0 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  position: sticky; top: 0; z-index: 50;
+}
+.topbar-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.topbar h1 { font-size: 15px; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+#totalCount { font-size: 12px; color: var(--ink3); font-weight: 600; white-space: nowrap; }
+.topbar-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.btn-topbar {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 7px 14px; border-radius: 8px;
+  font-size: 13px; font-weight: 700; cursor: pointer;
+  border: 1.5px solid var(--border); background: var(--surface); color: var(--ink);
+  transition: all var(--dur) var(--ease); white-space: nowrap;
+}
+.btn-topbar:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.btn-topbar.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+.btn-topbar.primary:hover { background: var(--accent-h); opacity: 1; }
+.btn-topbar.danger { color: var(--red); }
+.btn-topbar.danger:hover { border-color: var(--red); background: var(--red-bg); }
+.tabs {
+  display: flex; border-bottom: 2px solid var(--border);
+  background: var(--surface); padding: 0 20px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  padding: 12px 18px; font-size: 14px; font-weight: 700;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--ink3); border-bottom: 2px solid transparent;
+  margin-bottom: -2px; transition: all var(--dur) var(--ease);
+  white-space: nowrap; flex-shrink: 0;
+}
+.tab-btn:hover { color: var(--ink); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+#inactiveBanner {
+  background: #fffbeb; border-bottom: 1px solid #fcd34d;
+  padding: 12px 20px;
+}
+.filters {
+  padding: 12px 16px; display: flex; gap: 8px; align-items: center;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+}
+.filters::-webkit-scrollbar { display: none; }
+.filters input[type=search] {
+  padding: 8px 12px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  font-size: 14px; background: var(--bg); outline: none;
+  min-width: 180px; flex: 1; font-family: var(--font);
+}
+.filters input[type=search]:focus { border-color: var(--accent); }
+.filter-btn {
+  padding: 7px 14px; border-radius: 50px; border: 1.5px solid var(--border);
+  background: var(--bg); font-size: 12.5px; font-weight: 700;
+  cursor: pointer; transition: all var(--dur) var(--ease);
+  color: var(--ink); white-space: nowrap; flex-shrink: 0;
+}
+.filter-btn.active { border-color: var(--accent); background: var(--accent); color: #fff; }
+.filter-btn:hover:not(.active) { border-color: var(--accent-mid); color: var(--accent); background: var(--accent-light); }
+.table-wrap { padding: 16px 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table {
+  width: 100%; border-collapse: collapse; background: var(--surface);
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: 0 1px 4px rgba(15,17,32,.05), 0 0 0 1px var(--border);
+  font-size: 14px;
+}
+thead { background: var(--bg); }
+th {
+  text-align: left; padding: 10px 14px;
+  font-size: 10.5px; font-weight: 800; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: .07em;
+  border-bottom: 1px solid var(--border); white-space: nowrap;
+}
+td { padding: 12px 14px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f8f9ff; }
+.badge { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 50px; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
+.badge-pending { background: #fef9c3; color: #854d0e; }
+.badge-paid    { background: var(--green-bg); color: #15803d; }
+.badge-closed  { background: var(--bg2); color: var(--ink3); }
+.badge-expired { background: #fef3c7; color: #92400e; }
+.btn-close-cert {
+  padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 700;
+  cursor: pointer; border: 1.5px solid #fecaca;
+  background: var(--surface); color: var(--red);
+  transition: all var(--dur) var(--ease); white-space: nowrap;
+}
+.btn-close-cert:hover { background: var(--red); color: #fff; border-color: var(--red); }
+.cards-wrap { padding: 12px 14px; display: none; flex-direction: column; gap: 10px; }
+.cert-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.cert-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.cert-code { font-weight: 800; font-size: 14px; letter-spacing: .08em; color: var(--accent); font-family: 'Courier New', monospace; }
+.cert-amount { font-weight: 800; font-size: 15px; color: var(--ink); }
+.cert-meta { font-size: 12.5px; color: var(--ink3); display: flex; flex-direction: column; gap: 3px; font-weight: 500; }
+.cert-card-footer { display: flex; justify-content: space-between; align-items: center; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 16px 20px; }
+.page-btn {
+  padding: 8px 18px; border-radius: 8px; border: 1.5px solid var(--border);
+  background: var(--surface); font-size: 13.5px; font-weight: 700;
+  cursor: pointer; font-family: var(--font); color: var(--ink);
+  transition: all var(--dur) var(--ease);
+}
+.page-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.page-btn:disabled { opacity: .35; cursor: not-allowed; }
+.page-info { font-size: 13px; color: var(--ink3); font-weight: 600; }
+.empty { text-align: center; padding: 48px 16px; color: var(--ink3); font-size: 14px; font-weight: 500; }
+.empty .icon { font-size: 36px; margin-bottom: 12px; display: block; }
+#statsScreen { display: none; padding: 20px; }
+.stats-section {
+  font-size: 11px; font-weight: 800; color: var(--ink3);
+  text-transform: uppercase; letter-spacing: .1em; margin: 24px 0 12px;
+}
+.stats-section:first-child { margin-top: 0; }
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; margin-bottom: 4px; }
+.stat-card {
+  background: var(--surface); border-radius: var(--radius);
+  padding: 18px 20px; border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+}
+.stat-card.blue   { border-left-color: var(--accent); }
+.stat-card.green  { border-left-color: var(--green); }
+.stat-card.purple { border-left-color: var(--purple); }
+.stat-card.amber  { border-left-color: var(--amber); }
+.stat-label { font-size: 10.5px; font-weight: 800; color: var(--ink3); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+.stat-value { font-size: 30px; font-weight: 900; line-height: 1; color: var(--ink); letter-spacing: -.03em; }
+.stat-sub   { font-size: 12px; color: var(--ink3); margin-top: 5px; font-weight: 500; }
+.stats-table { background: var(--surface); border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; margin-bottom: 4px; }
+.stats-table table { width: 100%; border-collapse: collapse; font-size: 14px; box-shadow: none; border-radius: 0; }
+.stats-table th { text-align: left; padding: 10px 16px; font-size: 10.5px; font-weight: 800; color: var(--ink3); text-transform: uppercase; letter-spacing: .07em; border-bottom: 1px solid var(--border); background: var(--bg); }
+.stats-table td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.stats-table tr:last-child td { border-bottom: none; }
+.stats-table tr:hover td { background: #f8f9ff; }
+.stats-table .num   { font-weight: 800; color: var(--ink); font-size: 15px; }
+.stats-table .money { color: var(--ink3); font-size: 13px; }
+.stats-loading { text-align: center; padding: 60px; color: var(--ink3); font-size: 15px; }
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,17,32,.5); backdrop-filter: blur(2px);
+  z-index: 100; align-items: center; justify-content: center; padding: 16px;
+}
+.overlay.show { display: flex; }
+.modal {
+  background: var(--surface); border-radius: var(--radius-lg);
+  padding: 28px 28px 24px; width: 100%; max-width: 440px;
+  box-shadow: 0 24px 64px rgba(15,17,32,.18);
+  max-height: 90vh; overflow-y: auto; position: relative;
+}
+.modal h2 { font-size: 18px; font-weight: 900; letter-spacing: -.02em; margin-bottom: 6px; }
+.modal > p { color: var(--ink3); font-size: 13.5px; margin-bottom: 20px; line-height: 1.6; }
+.modal-actions { display: flex; gap: 10px; margin-top: 4px; }
+.modal-actions .btn { margin-top: 0; }
+.modal-close {
+  position: absolute; top: 14px; right: 14px;
+  width: 30px; height: 30px; border-radius: 7px;
+  border: none; background: transparent; font-size: 16px;
+  cursor: pointer; color: var(--ink3);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-close:hover { background: var(--bg); color: var(--ink); }
+.code-row { display: flex; gap: 8px; align-items: stretch; }
+.code-row input { flex: 1; font-family: 'Courier New', monospace; font-weight: 800; letter-spacing: .1em; font-size: 16px; text-transform: uppercase; }
+.btn-gen {
+  padding: 10px 14px; border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  background: var(--bg); cursor: pointer; font-size: 13px; font-weight: 700;
+  transition: all var(--dur) var(--ease); white-space: nowrap; color: var(--ink);
+}
+.btn-gen:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+@media (max-width: 700px) {
+  .table-wrap  { display: none !important; }
+  .cards-wrap  { display: flex !important; }
+  .topbar      { padding: 0 14px; }
+  .topbar h1   { font-size: 14px; max-width: 130px; }
+  #totalCount  { display: none; }
+  .tab-btn     { padding: 10px 14px; font-size: 13px; }
+  .filters     { padding: 10px 14px; }
+  .stats-grid  { grid-template-columns: repeat(2, 1fr); }
+  #statsScreen { padding: 12px; }
+  .modal       { padding: 22px 18px 20px; }
+}
+@media (max-width: 380px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .modal-actions { flex-direction: column; }
+  .topbar-right .btn-topbar:not(.primary) { display: none; }
+}
+  </style>
+</head>
+<body>
+
+<div id="loginScreen">
+  <div class="card">
+    <div class="logo"><svg width="58" height="12" viewBox="0 0 58 12" fill="none"><path d="M51.2023 5.868C51.5623 6.156 51.8383 6.48 52.0303 6.84C52.2223 7.2 52.4023 7.632 52.5703 8.136C52.7383 8.576 52.8583 8.864 52.9303 9H50.0383C50.0143 8.944 49.9663 8.768 49.8943 8.472C49.8303 8.176 49.7663 7.94 49.7023 7.764C49.6383 7.58 49.5423 7.42 49.4143 7.284C49.2143 7.068 48.9903 6.928 48.7423 6.864C48.4943 6.8 48.1263 6.768 47.6383 6.768V9H45.0703C45.1103 8.088 45.1303 6.996 45.1303 5.724C45.1303 4.452 45.1103 3.36 45.0703 2.448H47.6383V4.8H47.6863C48.6383 3.848 49.3303 3.064 49.7623 2.448H52.9303L50.1223 5.244C50.5383 5.42 50.8983 5.628 51.2023 5.868Z" fill="#0f1120"/><path d="M44.1097 2.448C44.0697 3.608 44.0497 4.656 44.0497 5.592C44.0497 6.512 44.0697 7.56 44.1097 8.736H41.6497L41.7817 4.584L39.9457 8.736H36.5977C36.6457 7.68 36.6697 6.632 36.6697 5.592C36.6697 4.536 36.6457 3.488 36.5977 2.448H38.9617L38.8417 6.708L40.6777 2.448H44.1097Z" fill="#0f1120"/><path d="M36.1121 4.704C34.9121 4.672 34.0401 4.652 33.4961 4.644V9H30.9521V4.644C30.4161 4.652 29.5481 4.672 28.3481 4.704V2.448H36.1121V4.704Z" fill="#0f1120"/><path d="M25.2596 2.328C25.7796 2.328 26.2476 2.476 26.6636 2.772C27.0796 3.068 27.4036 3.472 27.6356 3.984C27.8676 4.488 27.9836 5.044 27.9836 5.652C27.9836 6.252 27.8676 6.82 27.6356 7.356C27.4036 7.884 27.0756 8.312 26.6516 8.64C26.2356 8.96 25.7596 9.12 25.2236 9.12C24.5996 9.12 24.0636 8.992 23.6156 8.736C23.1756 8.472 22.8476 8.068 22.6316 7.524C22.6316 7.98 22.6476 8.712 22.6796 9.72C22.7116 10.696 22.7276 11.384 22.7276 11.784H20.0156C20.0636 10.296 20.0876 8.74 20.0876 7.116C20.0876 5.492 20.0636 3.936 20.0156 2.448H22.3196L22.6676 3.948C22.8916 3.388 23.2276 2.98 23.6756 2.724C24.1236 2.46 24.6516 2.328 25.2596 2.328ZM23.9756 6.96C24.3356 6.96 24.6356 6.848 24.8756 6.624C25.1236 6.392 25.2476 6.092 25.2476 5.724C25.2476 5.316 25.1356 4.984 24.9116 4.728C24.6876 4.472 24.3836 4.344 23.9996 4.344C23.5596 4.344 23.2276 4.452 23.0036 4.668C22.7796 4.876 22.6676 5.228 22.6676 5.724C22.6676 6.004 22.7396 6.24 22.8836 6.432C23.0276 6.616 23.1996 6.752 23.3996 6.84C23.5996 6.92 23.7916 6.96 23.9756 6.96Z" fill="#0f1120"/><path d="M17.6683 6H13.7563C13.8203 6.352 13.9763 6.64 14.2243 6.864C14.4803 7.08 14.8403 7.188 15.3043 7.188C15.6403 7.188 15.9563 7.124 16.2523 6.996C16.5483 6.86 16.7843 6.672 16.9603 6.432C17.4963 6.696 18.2083 6.98 19.0963 7.284C18.8483 7.844 18.3963 8.292 17.7403 8.628C17.0923 8.956 16.2443 9.12 15.1963 9.12C13.8363 9.12 12.8283 8.808 12.1723 8.184C11.5243 7.552 11.2003 6.724 11.2003 5.7C11.2003 4.7 11.5243 3.888 12.1723 3.264C12.8203 2.64 13.8283 2.328 15.1963 2.328C16.0123 2.328 16.7203 2.464 17.3203 2.736C17.9203 3.008 18.3803 3.388 18.7003 3.876C19.0203 4.356 19.1803 4.908 19.1803 5.532C19.1803 5.74 19.1723 5.896 19.1563 6H17.6683ZM15.3643 4.14C14.9643 4.14 14.6363 4.216 14.3803 4.368C14.1243 4.52 13.9443 4.728 13.8403 4.992H16.6723C16.5763 4.736 16.4203 4.532 16.2043 4.38C15.9883 4.22 15.7083 4.14 15.3643 4.14Z" fill="#0f1120"/><path d="M5.28 9.12C3.472 9.12 2.14 8.736 1.284 7.968C0.428 7.2 0 6.104 0 4.68C0 3.248 0.428 2.116 1.284 1.284C2.14 0.452 3.472 0.0359993 5.28 0.0359993C7.808 0.0359993 9.5 0.903999 10.356 2.64C9.636 2.888 8.792 3.26 7.824 3.756C7.592 3.308 7.224 2.976 6.72 2.76C6.224 2.544 5.716 2.436 5.196 2.436C4.428 2.436 3.856 2.64 3.48 3.048C3.104 3.448 2.916 3.944 2.916 4.536C2.916 5.176 3.116 5.7 3.516 6.108C3.924 6.508 4.544 6.708 5.376 6.708C6.04 6.708 6.568 6.6 6.96 6.384C7.352 6.16 7.64 5.808 7.824 5.328C8.48 5.68 9.32 6.076 10.344 6.516C9.944 7.484 9.276 8.16 8.34 8.544C7.404 8.928 6.384 9.12 5.28 9.12Z" fill="#0f1120"/><path d="M56.97 0.287L57.453 1.127L56.795 1.414L57.453 1.701L56.97 2.541L56.389 2.114L56.473 2.828H55.5L55.584 2.114L55.003 2.541L54.52 1.701L55.178 1.414L54.52 1.127L55.003 0.287L55.584 0.714L55.5 0H56.473L56.389 0.714L56.97 0.287Z" fill="#4F46E5"/></svg></div>
+    <h1>Демо‑панель</h1>
+    <div class="alert alert-error" id="loginError"></div>
+    <div class="field"><label>Логин</label><input type="text" id="loginInput" value="admin" autocomplete="username"></div>
+    <div class="field"><label>Пароль</label><input type="password" id="passwordInput" value="admin" autocomplete="current-password"></div>
+    <button class="btn" id="loginBtn"><div class="spinner" id="loginSpinner"></div><span>Войти</span></button>
+  </div>
+</div>
+
+<div id="adminScreen" style="display:none">
+  <div class="topbar"><div class="topbar-left"><span style="font-size:20px">🎁</span><h1>Сертификаты</h1><span id="totalCount"></span></div><div class="topbar-right"><button class="btn-topbar primary" id="openManualBtn">+ Добавить</button><button class="btn-topbar danger" id="logoutBtn">Выйти</button></div></div>
+  <div class="tabs"><button class="tab-btn active" data-tab="certs">🎟 Сертификаты</button><button class="tab-btn" data-tab="stats">📊 Статистика</button></div>
+  <div id="inactiveBanner" style="display:none"><div style="max-width:900px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap"><span>⏸️</span><div><div>Продажи приостановлены</div><div>Покупатели не могут приобрести сертификат. Продлите подписку.</div></div><a href="mailto:support@certic.ru" style="padding:8px 18px;background:#f59e0b;color:#fff;border-radius:8px;">Связаться</a></div></div>
+  <div id="certsTab"><div class="filters"><input type="search" id="searchInput" placeholder="🔍 Email, телефон, код, имя..."><button class="filter-btn active" data-status="">Все</button><button class="filter-btn" data-status="pending">Ожидают</button><button class="filter-btn" data-status="paid">Оплачены</button><button class="filter-btn" data-status="closed">Закрыты</button><button class="filter-btn" data-status="expired">Истёкшие</button></div><div class="table-wrap"> <table> <thead> <tr><th>Код</th><th>Сумма</th><th>Статус</th><th>Покупатель</th><th>Получатель</th><th>Email</th><th>Телефон</th><th>Дата</th><th></th></tr> </thead> <tbody id="tableBody"> <tr><td colspan="9" class="empty">Загрузка...</td></tr> </tbody> </table> </div><div class="cards-wrap" id="cardsWrap"></div><div class="pagination"><button class="page-btn" id="prevBtn" disabled>← Назад</button><span class="page-info" id="pageInfo"></span><button class="page-btn" id="nextBtn" disabled>Вперёд →</button></div></div>
+  <div id="statsScreen"><div id="statsContent"><div class="stats-loading">📊 Загрузка статистики...</div></div></div>
+</div>
+
+<div class="overlay" id="confirmOverlay"><div class="modal"><button class="modal-close" id="closeConfirmX">✕</button><h2>Закрыть сертификат?</h2><p>Сертификат <strong id="confirmCode"></strong> будет отмечен как использованный. Отменить нельзя.</p><div class="modal-actions"><button class="btn btn-danger" id="confirmYes">Закрыть</button><button class="btn btn-outline" id="confirmNo">Отмена</button></div></div></div>
+<div class="overlay" id="manualOverlay"><div class="modal"><button class="modal-close" id="manualCloseX">✕</button><h2>Добавить вручную</h2><p>Для физически проданных сертификатов. Статус будет сразу «Оплачен».</p><div class="alert alert-error" id="manualError"></div><div class="field"><label>Код сертификата</label><div class="code-row"><input type="text" id="manualCode" maxlength="8" readonly><button class="btn-gen" id="genCodeBtn">🔄 Новый</button></div></div><div class="field"><label>Сумма (₽) *</label><input type="number" id="manualAmount" placeholder="5000" min="1"></div><div class="field"><label>Имя покупателя</label><input type="text" id="manualBuyerName" placeholder="Иван Иванов"></div><div class="field"><label>Имя получателя</label><input type="text" id="manualRecipientName" placeholder="Мария Петрова"></div><div class="field"><label>Email</label><input type="email" id="manualEmail" placeholder="client@mail.ru"></div><div class="field"><label>Телефон</label><input type="tel" id="manualPhone" placeholder="+7 900 000-00-00"></div><div class="field"><label>Примечание</label><input type="text" id="manualNote" placeholder="Продан на кассе"></div><div class="modal-actions"><button class="btn" id="manualSaveBtn"><div class="spinner" id="manualSpinner"></div><span>Сохранить</span></button><button class="btn btn-outline" id="manualCancelBtn">Отмена</button></div></div></div>
+
+<script>
+  // ==================== ДЕМО-РЕЖИМ: полная эмуляция API ====================
+  const DEMO_AUTH_HEADER = 'Basic ' + btoa('admin:admin');
+  let certificates = [];
+  let nextId = 100;
+
+  const ABC = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+  function genCode(len=8){
+    let s=''; const arr = new Uint8Array(len*2); crypto.getRandomValues(arr);
+    for(let i=0;i<arr.length && s.length<len;i++) s+=ABC[arr[i]%ABC.length];
+    return s;
+  }
+
+  function initDemoData(){
+    const names = ['Алексей Смирнов','Елена Козлова','Дмитрий Петров','Ольга Новикова','Игорь Морозов'];
+    const recipients = ['Мария','Сергей','Анна','Денис','Екатерина'];
+    const emails = ['alex@mail.ru','elena@ya.ru','dima@bk.ru','olga@list.ru','igor@gmail.com'];
+    const phones = ['+79161234567','+79269876543','+79031112233','+79507778899','+79815556677'];
+    const statuses = ['paid','pending','closed','expired','paid'];
+    const amounts = [2500, 5000, 3000, 1000, 7500];
+    const dates = ['2025-02-10T12:00:00','2025-02-12T14:30:00','2025-02-01T09:15:00','2025-01-20T18:45:00','2025-02-14T11:20:00'];
+
+    certificates = [];
+    for(let i=0;i<5;i++){
+      let code = '';
+      do { code = genCode(8); } while(certificates.some(c=>c.public_code===code));
+      certificates.push({
+        id: nextId++,
+        public_code: code,
+        amount: amounts[i],
+        status: statuses[i],
+        buyer_name: names[i],
+        recipient_name: recipients[i],
+        email: emails[i],
+        phone: phones[i],
+        note: null,
+        created_at: dates[i],
+        paid_at: statuses[i]==='pending' ? null : dates[i],
+        closed_at: statuses[i]==='closed' ? dates[i] : null
+      });
+    }
+  }
+  initDemoData();
+
+  function filterCerts(status, search){
+    let filtered = [...certificates];
+    if(status && status !== '') filtered = filtered.filter(c=>c.status===status);
+    if(search){
+      const s = search.toLowerCase();
+      filtered = filtered.filter(c=>
+        c.public_code.toLowerCase().includes(s) ||
+        (c.email && c.email.toLowerCase().includes(s)) ||
+        (c.phone && c.phone.includes(s)) ||
+        (c.buyer_name && c.buyer_name.toLowerCase().includes(s)) ||
+        (c.recipient_name && c.recipient_name.toLowerCase().includes(s))
+      );
+    }
+    return filtered;
+  }
+
+  function paginate(data, page, limit=20){
+    const total = data.length;
+    const totalPages = Math.ceil(total/limit) || 1;
+    const start = (page-1)*limit;
+    const items = data.slice(start, start+limit);
+    return { data: items, pagination: { page, limit, total, totalPages } };
+  }
+
+  function computeStats(){
+    const all = certificates.length;
+    const paid = certificates.filter(c=>c.status==='paid').length;
+    const closed = certificates.filter(c=>c.status==='closed').length;
+    const pending = certificates.filter(c=>c.status==='pending').length;
+    const sumPaid = certificates.filter(c=>c.status==='paid').reduce((s,c)=>s+c.amount,0);
+    const sumClosed = certificates.filter(c=>c.status==='closed').reduce((s,c)=>s+c.amount,0);
+    const now = new Date();
+    const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+    const weekStart = new Date(now.setDate(now.getDate()-now.getDay())).toISOString();
+    const newMonth = certificates.filter(c=>c.created_at >= monthStart).length;
+    const newWeek = certificates.filter(c=>c.created_at >= weekStart).length;
+    const newYear = certificates.filter(c=>new Date(c.created_at).getFullYear()===now.getFullYear()).length;
+    const sumNewMonth = certificates.filter(c=>c.created_at>=monthStart && c.status==='paid').reduce((s,c)=>s+c.amount,0);
+    const closedWeek = certificates.filter(c=>c.status==='closed' && c.closed_at && c.closed_at>=weekStart).length;
+    const closedMonth = certificates.filter(c=>c.status==='closed' && c.closed_at && c.closed_at>=monthStart).length;
+    const closedYear = certificates.filter(c=>c.status==='closed' && c.closed_at && new Date(c.closed_at).getFullYear()===now.getFullYear()).length;
+    return {
+      total:{all, paid, closed, pending},
+      sums:{ paid:sumPaid, closed:sumClosed, newMonth:sumNewMonth },
+      new:{ week:newWeek, month:newMonth, year:newYear },
+      closed:{ week:closedWeek, month:closedMonth, year:closedYear },
+      is_active: true
+    };
+  }
+
+  // Эмуляция fetch (исправлена обработка /close)
+  const originalFetch = window.fetch;
+  window.fetch = function(url, options){
+    const reqUrl = typeof url === 'string' ? url : url.url;
+    if(!reqUrl.includes('/admin/certificates')) return originalFetch(url, options);
+    const auth = options?.headers?.Authorization;
+    if(auth !== DEMO_AUTH_HEADER) {
+      return Promise.reject(new Response(JSON.stringify({error:'Unauthorized'}), {status:401, statusText:'Unauthorized'}));
+    }
+    const method = options?.method || 'GET';
+    
+    // GET /?page&status&search
+    if(method==='GET' && reqUrl.includes('/admin/certificates/?') && !reqUrl.includes('/stats')){
+      const q = new URLSearchParams(reqUrl.split('?')[1]);
+      const page = parseInt(q.get('page')) || 1;
+      const status = q.get('status') || '';
+      const search = q.get('search') || '';
+      const filtered = filterCerts(status, search);
+      const result = paginate(filtered, page, 20);
+      return Promise.resolve(new Response(JSON.stringify(result), {status:200, headers:{'Content-Type':'application/json'}}));
+    }
+    // GET /stats
+    if(method==='GET' && reqUrl.endsWith('/stats')){
+      return Promise.resolve(new Response(JSON.stringify(computeStats()), {status:200, headers:{'Content-Type':'application/json'}}));
+    }
+    // POST /{id}/close — более надежная проверка
+    if(method==='POST' && reqUrl.includes('/close')){
+      const parts = reqUrl.split('/');
+      const idIndex = parts.indexOf('certificates') + 1;
+      const id = parseInt(parts[idIndex]);
+      if(isNaN(id)) return Promise.resolve(new Response(JSON.stringify({error:'Invalid ID'}), {status:400}));
+      const cert = certificates.find(c=>c.id===id);
+      if(!cert) return Promise.resolve(new Response(JSON.stringify({error:'Not found'}), {status:404}));
+      if(cert.status !== 'paid') return Promise.resolve(new Response(JSON.stringify({error:'Можно закрыть только оплаченный'}), {status:400}));
+      cert.status = 'closed';
+      cert.closed_at = new Date().toISOString();
+      return Promise.resolve(new Response(JSON.stringify({success:true}), {status:200}));
+    }
+    // POST /manual
+    if(method==='POST' && reqUrl.endsWith('/manual')){
+      const body = JSON.parse(options.body);
+      let code = '';
+      do { code = genCode(8); } while(certificates.some(c=>c.public_code===code));
+      const newCert = {
+        id: nextId++,
+        public_code: code,
+        amount: body.amount,
+        status: 'paid',
+        buyer_name: body.buyerName || null,
+        recipient_name: body.recipientName || null,
+        email: body.email || null,
+        phone: body.phone || null,
+        note: body.note || null,
+        created_at: new Date().toISOString(),
+        paid_at: new Date().toISOString(),
+        closed_at: null
+      };
+      certificates.unshift(newCert);
+      return Promise.resolve(new Response(JSON.stringify({success:true, id:newCert.id}), {status:200}));
+    }
+    return Promise.resolve(new Response(JSON.stringify({error:'Not found'}), {status:404}));
+  };
+
+  // ==================== АДМИНКА (оригинальный код, работает с эмуляцией) ====================
+  let authHeader = sessionStorage.getItem('adminAuth_demo') || null;
+  let state = { page:1, status:'', search:'', totalPages:1 };
+  let pendingCloseId = null, pendingCloseCode = null;
+  let statsLoaded = false;
+  const API = '/admin/certificates';
+
+  function showLoginScreen(){
+    authHeader = null;
+    sessionStorage.removeItem('adminAuth_demo');
+    document.getElementById('adminScreen').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+  }
+
+  async function login(){
+    const loginVal = document.getElementById('loginInput').value.trim();
+    const passVal  = document.getElementById('passwordInput').value;
+    const errEl    = document.getElementById('loginError');
+    errEl.style.display = 'none';
+    if(loginVal!=='admin' || passVal!=='admin'){
+      errEl.textContent = 'Неверный логин или пароль (используйте admin/admin)';
+      errEl.style.display = 'block'; return;
+    }
+    const header = 'Basic ' + btoa('admin:admin');
+    try{
+      const res = await fetch(API + '/stats', { headers:{ 'Authorization': header } });
+      if(res.status===401) throw new Error();
+      const data = await res.json();
+      authHeader = header;
+      sessionStorage.setItem('adminAuth_demo', header);
+      document.getElementById('inactiveBanner').style.display = data.is_active === false ? '' : 'none';
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminScreen').style.display = 'block';
+      load();
+    } catch(e){
+      errEl.textContent = 'Ошибка подключения к демо-серверу';
+      errEl.style.display = 'block';
+    }
+  }
+
+  document.getElementById('loginBtn').addEventListener('click', login);
+  document.getElementById('loginInput').addEventListener('keydown', e=>e.key==='Enter'&&login());
+  document.getElementById('passwordInput').addEventListener('keydown', e=>e.key==='Enter'&&login());
+
+  document.getElementById('logoutBtn').addEventListener('click', ()=>{
+    authHeader=null; statsLoaded=false;
+    sessionStorage.removeItem('adminAuth_demo');
+    document.getElementById('adminScreen').style.display='none';
+    document.getElementById('loginScreen').style.display='flex';
+    switchTab('certs');
+  });
+
+  function switchTab(tab){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add('active');
+    document.getElementById('certsTab').style.display = tab==='certs' ? '' : 'none';
+    document.getElementById('statsScreen').style.display = tab==='stats' ? 'block' : 'none';
+    if(tab==='stats') loadStats();
+  }
+  document.querySelectorAll('.tab-btn').forEach(btn=>btn.addEventListener('click',()=>switchTab(btn.dataset.tab)));
+
+  async function load(){
+    const params = new URLSearchParams({page:state.page, limit:20, ...(state.status&&{status:state.status}), ...(state.search&&{search:state.search})});
+    try{
+      const res = await fetch(API+'/?'+params, { headers:{ 'Authorization': authHeader } });
+      if(res.status===401){ showLoginScreen(); return; }
+      render(await res.json());
+    } catch(e){ /* ignore */ }
+  }
+
+  const BADGE = { pending:'badge-pending', paid:'badge-paid', closed:'badge-closed', expired:'badge-expired' };
+  const LABEL = { pending:'Ожидает', paid:'Оплачен', closed:'Закрыт', expired:'Истёк' };
+  function fmtDate(dt){ return dt ? new Date(dt).toLocaleDateString('ru-RU') : '—'; }
+
+  function render({ data, pagination }){
+    state.totalPages = pagination.totalPages;
+    document.getElementById('totalCount').textContent = 'Всего: '+pagination.total;
+    document.getElementById('pageInfo').textContent = `Стр. ${pagination.page} из ${pagination.totalPages||1}`;
+    document.getElementById('prevBtn').disabled = pagination.page<=1;
+    document.getElementById('nextBtn').disabled = pagination.page>=pagination.totalPages;
+    if(!data.length){
+      const emptyMsg = '<div class="icon">📋</div>Сертификаты не найдены';
+      document.getElementById('tableBody').innerHTML = `<tr><td colspan="9" class="empty">${emptyMsg}</td></tr>`;
+      document.getElementById('cardsWrap').innerHTML = `<div class="empty">${emptyMsg}</div>`;
+      return;
+    }
+    document.getElementById('tableBody').innerHTML = data.map(c=>`
+      <tr>
+        <td><code style="font-weight:700">${c.public_code}</code></td>
+        <td><strong>${Number(c.amount).toLocaleString()} ₽</strong></td>
+        <td><span class="badge ${BADGE[c.status]||''}">${LABEL[c.status]||c.status}</span></td>
+        <td>${c.buyer_name||'—'}</td><td>${c.recipient_name||'—'}</td>
+        <td>${c.email||'—'}</td><td>${c.phone||'—'}</td>
+        <td>${fmtDate(c.paid_at||c.created_at)}</td>
+        <td>${c.status==='paid'?`<button class="btn-close-cert" data-id="${c.id}" data-code="${c.public_code}">Закрыть</button>`:''}</td>
+      </tr>
+    `).join('');
+    document.getElementById('cardsWrap').innerHTML = data.map(c=>`
+      <div class="cert-card">
+        <div class="cert-card-top"><span class="cert-code">${c.public_code}</span><span class="badge ${BADGE[c.status]}">${LABEL[c.status]}</span></div>
+        <div><span class="cert-amount">${Number(c.amount).toLocaleString()} ₽</span><span style="float:right">${fmtDate(c.paid_at||c.created_at)}</span></div>
+        <div class="cert-meta">${c.buyer_name?`👤 ${c.buyer_name}`:''} ${c.recipient_name?`🎁 ${c.recipient_name}`:''} ${c.email?c.email:''}</div>
+        <div class="cert-card-footer">${c.status==='paid'?`<button class="btn-close-cert" data-id="${c.id}" data-code="${c.public_code}">Закрыть</button>`:`<span>${LABEL[c.status]}</span>`}</div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.btn-close-cert').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        pendingCloseId = btn.dataset.id; pendingCloseCode = btn.dataset.code;
+        document.getElementById('confirmCode').textContent = pendingCloseCode;
+        document.getElementById('confirmOverlay').classList.add('show');
+      });
+    });
+  }
+
+  document.getElementById('confirmYes').addEventListener('click', async ()=>{
+    document.getElementById('confirmOverlay').classList.remove('show');
+    if(!pendingCloseId) return;
+    try{
+      const res = await fetch(`${API}/${pendingCloseId}/close`, { method:'POST', headers:{ 'Authorization': authHeader } });
+      if(!res.ok) { const d = await res.json(); alert(d.error||'Ошибка'); return; }
+      load(); statsLoaded=false;
+    } catch(e){ alert('Ошибка сети'); }
+    finally{ pendingCloseId=null; pendingCloseCode=null; }
+  });
+  document.getElementById('confirmNo').addEventListener('click',()=>document.getElementById('confirmOverlay').classList.remove('show'));
+  document.getElementById('closeConfirmX').addEventListener('click',()=>document.getElementById('confirmNo').click());
+
+  // manual
+  document.getElementById('openManualBtn').addEventListener('click',()=>{
+    document.getElementById('manualError').style.display='none';
+    document.getElementById('manualCode').value = genCode(8);
+    document.getElementById('manualAmount').value='';
+    document.getElementById('manualBuyerName').value='';
+    document.getElementById('manualRecipientName').value='';
+    document.getElementById('manualEmail').value='';
+    document.getElementById('manualPhone').value='';
+    document.getElementById('manualOverlay').classList.add('show');
+  });
+  document.getElementById('genCodeBtn').addEventListener('click',()=>document.getElementById('manualCode').value=genCode(8));
+  document.getElementById('manualSaveBtn').addEventListener('click',async ()=>{
+    const err=document.getElementById('manualError'), amount=document.getElementById('manualAmount').value;
+    err.style.display='none';
+    if(!amount||Number(amount)<1){ err.textContent='Укажите сумму'; err.style.display='block'; return; }
+    const btn=document.getElementById('manualSaveBtn'), sp=document.getElementById('manualSpinner'), bt=btn.querySelector('span');
+    btn.disabled=true; sp.style.display='block'; bt.textContent='Сохраняем...';
+    try{
+      const res=await fetch(API+'/manual',{ method:'POST', headers:{'Content-Type':'application/json','Authorization':authHeader}, body:JSON.stringify({
+        amount:Number(amount), buyerName:document.getElementById('manualBuyerName').value.trim()||undefined,
+        recipientName:document.getElementById('manualRecipientName').value.trim()||undefined,
+        email:document.getElementById('manualEmail').value.trim()||undefined,
+        phone:document.getElementById('manualPhone').value.trim()||undefined,
+        note:document.getElementById('manualNote').value.trim()||undefined
+      })});
+      if(!res.ok) throw new Error((await res.json()).error||'Ошибка');
+      document.getElementById('manualOverlay').classList.remove('show');
+      load(); statsLoaded=false;
+    } catch(e){ err.textContent=e.message; err.style.display='block'; }
+    finally{ btn.disabled=false; sp.style.display='none'; bt.textContent='Сохранить'; }
+  });
+  document.getElementById('manualCancelBtn').addEventListener('click',()=>document.getElementById('manualOverlay').classList.remove('show'));
+  document.getElementById('manualCloseX').addEventListener('click',()=>document.getElementById('manualCancelBtn').click());
+
+  document.querySelectorAll('.filter-btn').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      state.status=btn.dataset.status; state.page=1; load();
+    });
+  });
+  let searchTimer;
+  document.getElementById('searchInput').addEventListener('input',e=>{
+    clearTimeout(searchTimer);
+    searchTimer=setTimeout(()=>{ state.search=e.target.value.trim(); state.page=1; load(); },400);
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{ state.page--; load(); });
+  document.getElementById('nextBtn').addEventListener('click',()=>{ state.page++; load(); });
+
+  async function loadStats(){
+    if(statsLoaded) return;
+    const c=document.getElementById('statsContent');
+    c.innerHTML='<div class="stats-loading">📊 Загрузка...</div>';
+    try{
+      const res=await fetch(API+'/stats',{ headers:{ 'Authorization': authHeader } });
+      if(res.status===401){ showLoginScreen(); return; }
+      const d=await res.json();
+      function fmt(n){ return Number(n).toLocaleString('ru-RU'); }
+      function rub(n){ return fmt(n)+'\u00a0₽'; }
+      c.innerHTML=`
+        <div class="stats-section">Общая картина</div>
+        <div class="stats-grid"><div class="stat-card blue"><div class="stat-label">Всего сертификатов</div><div class="stat-value">${fmt(d.total.all)}</div><div class="stat-sub">за всё время</div></div>
+        <div class="stat-card green"><div class="stat-label">Активные (оплачены)</div><div class="stat-value">${fmt(d.total.paid)}</div><div class="stat-sub">${rub(d.sums.paid)}</div></div>
+        <div class="stat-card purple"><div class="stat-label">Использованы</div><div class="stat-value">${fmt(d.total.closed)}</div><div class="stat-sub">${rub(d.sums.closed)}</div></div>
+        <div class="stat-card amber"><div class="stat-label">Ожидают оплаты</div><div class="stat-value">${fmt(d.total.pending)}</div><div class="stat-sub">незавершённые</div></div></div>
+        <div class="stats-section">Новые сертификаты</div><div class="stats-table"><table><thead><tr><th>Период</th><th>Количество</th><th>Сумма</th></tr></thead><tbody>
+        <tr><td>Эта неделя</td><td class="num">${fmt(d.new.week)}</td><td class="money">—</td></tr>
+        <tr><td>Этот месяц</td><td class="num">${fmt(d.new.month)}</td><td class="money">${rub(d.sums.newMonth)}</td></tr>
+        <tr><td>Этот год</td><td class="num">${fmt(d.new.year)}</td><td class="money">—</td></tr></tbody></table></div>
+        <div class="stats-section">Закрытые сертификаты</div><div class="stats-table"><table><thead><tr><th>Период</th><th>Количество</th></tr></thead><tbody>
+        <tr><td>Эта неделя</td><td class="num">${fmt(d.closed.week)}</td></tr>
+        <tr><td>Этот месяц</td><td class="num">${fmt(d.closed.month)}</td></tr>
+        <tr><td>Этот год</td><td class="num">${fmt(d.closed.year)}</td></tr></tbody></table></div>
+      `;
+      statsLoaded=true;
+    } catch(e){ c.innerHTML='<div class="stats-loading">⚠️ Ошибка статистики</div>'; }
+  }
+
+  if(authHeader) load();
+</script>
+</body>
+</html>
